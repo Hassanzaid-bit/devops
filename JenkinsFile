@@ -35,20 +35,16 @@ pipeline {
             steps {
                 script {
                     // Get the user who pushed the code (Windows Command Prompt)
-                    def gitUser = bat(script: 'git log -1 --pretty=format:"%an"', returnStatus: true).trim()
+                    def gitUser = bat(script: 'git log -1 --pretty=format:"%an"')
 
                     // Get the commit message (Windows Command Prompt)
-                    def commitMessage = bat(script: 'git log -1 --pretty=format:"%s"', returnStatus: true).trim()
-
-                    // Remove double quotes from gitUser and commitMessage
-                    gitUser = gitUser.replaceAll('"', '')
-                    commitMessage = commitMessage.replaceAll('"', '')
+                    def commitMessage = bat(script: 'git log -1 --pretty=format:"%s"')
 
                     // Define the Slack message
                     def slackMessage = "Build pipeline completed successfully.\nPushed by: ${gitUser}\nCommit Message: ${commitMessage}"
 
                     // Send the Slack notification
-                    slackSend(color: '#36a64f', message: slackMessage)
+                    slackSend(color: '#36a64f', message: slackMessage, channel: '#general')
                 }
             }
         }
