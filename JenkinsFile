@@ -34,12 +34,12 @@ pipeline {
         stage('Send Slack Notification') {
             steps {
                 script {
-                    // Get the user who pushed the code
-                    def gitUser = sh(script: 'git log -1 --pretty=format:%an', returnStdout: true).trim()
-                    
-                    // Get the commit message
-                    def commitMessage = sh(script: 'git log -1 --pretty=format:%s', returnStdout: true).trim()
-                    
+                    // Get the user who pushed the code (Windows Command Prompt)
+                    def gitUser = bat(script: 'git log -1 --pretty=format:%an', returnStatus: true).trim()
+
+                    // Get the commit message (Windows Command Prompt)
+                    def commitMessage = bat(script: 'git log -1 --pretty=format:%s', returnStatus: true).trim()
+
                     // Define the Slack message
                     def slackMessage = "Build pipeline completed successfully.\nPushed by: ${gitUser}\nCommit Message: ${commitMessage}"
 
