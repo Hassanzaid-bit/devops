@@ -31,5 +31,16 @@ pipeline {
                 echo 'Save the assemblies generated from the compilation' 
             }
         }
+        stage('Send Slack Notification') {
+            steps {
+                script {
+                    // Define the Slack message
+                    def slackMessage = "Build pipeline completed successfully."
+
+                    // Send the Slack notification
+                    slackSend(color: '#36a64f', message: slackMessage)
+                }
+            }
+        }
     }
 }
