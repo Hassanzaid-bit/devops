@@ -41,7 +41,7 @@ pipeline {
                     def commitMessage = bat(script: 'git log -1 --pretty=format:"%s"')
 
                     // Define the Slack message
-                    def slackMessage = "Build pipeline completed successfully.\nPushed by: ${gitUser}\nCommit Message: ${commitMessage}"
+                    def slackMessage = "Build2 pipeline completed successfully.\nPushed by: ${gitUser}\nCommit Message: ${commitMessage}"
 
                     // Send the Slack notification
                     slackSend(color: '#36a64f', message: slackMessage, channel: '#general')
