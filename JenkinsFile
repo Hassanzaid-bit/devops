@@ -40,7 +40,8 @@ pipeline {
             // Send Slack notification on successful build
             slackSend (
                 color: '#36a64f', // Set a color for your message
-                message: "Build successful! Commit by ${currentBuild.getBuildCauses()[0].userId}.\n\nCommit Message: ${currentBuild.getBuildCauses()[0].shortDescription}"
+                // message: "Build successful! Commit by ${currentBuild.getBuildCauses()[0].userId}.\n\nCommit Message: ${currentBuild.getBuildCauses()[0].shortDescription}"
+                message: "Build successful! Commit by ${getAuthorName()}.\n\nCommit Message: ${getCommitMessage()}"
             )
         }
         
@@ -48,7 +49,7 @@ pipeline {
             // Send Slack notification on build failure
             slackSend (
                 color: '#FF5733', // Set a different color for failure messages
-                message: "Build failed! Commit by ${currentBuild.getBuildCauses()[0].userId}.\n\nCommit Message: ${currentBuild.getBuildCauses()[0].shortDescription}"
+                message: "Build failed! Commit by ${getAuthorName()}.\n\nCommit Message: ${getCommitMessage()}"
             )
         }
     }
