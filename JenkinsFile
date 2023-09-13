@@ -17,6 +17,7 @@ pipeline {
                     println("GIT CommitMessage: " + gitCommitMessage)
                 }
             }
+        }
         stage('Static Analysis') {
             steps {
                 echo 'Run the static analysis to the code' 
@@ -48,7 +49,7 @@ pipeline {
             }
         }
     }
-    }
+    
     post {
         success {
             // Send Slack notification on successful build
@@ -89,8 +90,8 @@ pipeline {
     //         }
     //     }
     // }
-}
 
+}
 
 @NonCPS
 List<String> getChangedFilesList(){
